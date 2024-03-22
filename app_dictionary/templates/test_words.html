@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="card m-5 bg-danger bg-gradient">
+        <div class="card-header">
+            <div class="card-title">
+                <h1 class="text-center p-3 text-light ts">Test Words</h1>
+            </div>
+        </div>
+        <div class="card-body">
+          <table id="table1" class="table table-bordered text-center table-dark bg-dark bg-gradient table-hover">
+            <thead>
+                <th>English</th>
+                <th>Malayalam</th>
+            </thead>
+            <tbody class="table_bod">
+              <tr>
+                <td>
+                  <input name="eng[]" class="form-control input_color1" value="{{ dict.eng_word }}" type="text" readonly required>
+                </td>
+                <td>
+                  <input name="mal[]" class="form-control input_color1" value="{{ dict.mal_word }}" type="text" readonly required>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="flex justify-content-center text-center">
+            <a class="btn btn-light" href="{% url 'test_words' %}">Reset</a>
+            <a class="btn btn-light" href="{% url 'prev_word' dict.id %}">Previous</a>
+            <a class="btn btn-light px-4" href="{% url 'next_word' dict.id %}">Next</a>
+          </div>
+        </div>
+        <div class="card-footer">
+
+        </div>
+    </div>
+
+    <script>
+      $(document).ready(function(){
+        $('.test_w').addClass('active')
+      })
+  </script>
+
+{% endblock %}
+    
+
+</body>
+</html>

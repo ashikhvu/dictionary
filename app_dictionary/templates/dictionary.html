@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="card m-5 bg-danger bg-gradient">
+        <div class="card-header">
+            <div class="card-title">
+                <h1 class="text-center p-3 text-light ts">MY DICTIONARY</h1>
+            </div>
+        </div>
+        <div class="card-body">
+          <div {% if is_online %}  class="text-end p-2" {% else %} class="text_last" style="padding: 0.5rem;" {% endif %}>
+            <a class="btn btn-warning" href="{% url 'delete_all' %}">Delete All</a>
+            <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal1" >confirm delete</button>
+            <div class="modal fade" id="modal1" tabindex="-1">
+              <div class="modal-dialog bg-light">
+                <div class="modal-contnt">
+                  <div class="modal-header">
+                    <h1 class="modal-title">Confirm Delete</h1>
+                    <span data-dismiss="modal" class="">x</span>
+                  </div>
+                  <div class="modal-body">
+                    <p class="">Do you want to delete all the dictionary contents ? </p>
+                  </div>
+                  <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <button class="btn btn-success"  >Yes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+            <table class="table table-dark table-hover table-dark bg-dark">
+              <thead>
+                <th style="width: 1rem;padding-left: 2rem;">#</th>
+                <th>English</th>
+                <th>Malayalam</th>
+            </thead>
+            <tbody class="table_bod">
+              {% if dict %}
+                {% for i in dict %}
+                <tr>
+                  <td style="width: 1rem;padding: 1rem 2rem;padding-right: 0rem;">{{ forloop.counter }}</td>
+                  <td>
+                    <input name="eng[]" class="form-control input_color1" type="text" value="{{ i.eng_word }}" readonly>
+                  </td>
+                  <td>
+                    <input name="mal[]" class="form-control input_color1" type="text" value="{{ i.mal_word }}" readonly>
+                  </td>
+                </tr>
+                {% endfor %}
+              {% endif %}
+            </tbody>
+            </table>
+        </div>
+        <div class="card-footer">
+
+        </div>
+    </div>
+
+    <script>
+      $(document).ready(function(){
+        $('.dict').addClass('active')
+      })
+  </script>
+
+{% endblock %}
+    
+
+</body>
+</html>
