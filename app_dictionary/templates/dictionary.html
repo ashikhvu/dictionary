@@ -2,7 +2,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="card m-5 bg-danger bg-gradient">
+
+<style>
+  @media screen and (min-width:801px) {
+    .card_margin{
+      margin: 2rem 3rem 3rem 3rem;
+      margin-top: 1rem;
+    }
+  }
+  @media screen and (max-width:800px) {
+    .card_margin{
+      margin: 1rem 0rem 0rem 0rem;
+    }
+  }
+</style>
+
+
+    <div class="card card_margin bg-danger bg-gradient">
         <div class="card-header">
             <div class="card-title">
                 <h1 class="text-center p-3 text-light ts">MY DICTIONARY</h1>
@@ -10,8 +26,18 @@
         </div>
         <div class="card-body">
           <div {% if is_online %}  class="text-end p-2" {% else %} class="text_last" style="padding: 0.5rem;" {% endif %}>
-            <a class="btn btn-warning" href="{% url 'delete_all' %}">Delete All</a>
-            <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal1" >confirm delete</button>
+            <div class="row">
+              <div class="col-md-9">
+                <input class="form-control" type="text" placeholder="Search here..." id="inputSearch">
+              </div>
+              <div class="col-md-3">
+                <div class="d-flex justify-content-between">
+                  <a class="btn btn-warning" href="{% url 'delete_all' %}">Delete All</a>
+                  <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal1" >confirm delete</button>
+                </div>
+              </div>
+              
+            </div>
             <div class="modal fade" id="modal1" tabindex="-1">
               <div class="modal-dialog bg-light">
                 <div class="modal-contnt">
@@ -36,13 +62,13 @@
                 <th>English</th>
                 <th>Malayalam</th>
             </thead>
-            <tbody class="table_bod">
+            <tbody class="table_bod" id="tbody1">
               {% if dict %}
                 {% for i in dict %}
-                <tr>
+                <tr onclick="window.location.href = `{% url 'test_words' i.id %}`">
                   <td style="width: 1rem;padding: 1rem 2rem;padding-right: 0rem;">{{ forloop.counter }}</td>
                   <td>
-                    <input name="eng[]" class="form-control input_color1" type="text" value="{{ i.eng_word }}" readonly>
+                    <input name="eng[]" class="form-control input_color1 engText" type="text" value="{{ i.eng_word }}" readonly>
                   </td>
                   <td>
                     <input name="mal[]" class="form-control input_color1" type="text" value="{{ i.mal_word }}" readonly>
@@ -64,6 +90,23 @@
       })
   </script>
 
+  <script>
+    $(document).ready(function(){
+      $('#inputSearch').on('input',function(){
+        var inpText = $(this).val()
+        $('#tbody1 tr .engText').filter(function(){
+          if($(this).val().indexOf(inpText)!== -1)
+          {
+            $(this).parent().parent().show()
+          }
+          else
+          {
+            $(this).parent().parent().hide()
+          }
+        })
+      })
+    })
+  </script>
 {% endblock %}
     
 

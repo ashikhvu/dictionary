@@ -2,8 +2,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<style>
+  @media screen and (min-width:801px) {
+    .card_margin{
+      margin: 2rem 3rem 3rem 3rem;
+      margin-top: 1rem;
+    }
+  }
+  @media screen and (max-width:800px) {
+    .card_margin{
+      margin: 1rem 0rem 0rem 0rem;
+    }
+  }
+</style>
 
-<div class="card m-5 bg-danger bg-gradient">
+<div class="card card_margin bg-danger bg-gradient">
   <div class="card-header">
       <div class="card-title">
           <h1 class="text-center p-3 text-light ts">MY DICTIONARY</h1>

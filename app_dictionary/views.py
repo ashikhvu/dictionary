@@ -6,7 +6,7 @@ def home(request):
     return render(request,'home.html')
 
 def dictionary(request):
-    dict = dictionary_model.objects.all().order_by('eng_word')
+    dict = dictionary_model.objects.all().order_by('id')
     try:
         response = request.get('https://www.example.com',timeout=5)
         is_online = response.status_code == 200
@@ -51,8 +51,11 @@ def delete_all(request):
     dict.delete()
     return redirect('dictionary')
 
-def test_words(request):
-    dict = dictionary_model.objects.first()
+def test_words(request,pk):
+    if pk == 0:
+        dict = dictionary_model.objects.first()
+    else:
+        dict = dictionary_model.objects.get(id=pk)
     return render(request,'test_words.html',{"dict":dict})
 
 def next_word(request,pk):
