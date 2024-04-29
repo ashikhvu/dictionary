@@ -75,3 +75,18 @@ def prev_word(request,pk):
     except:
         dict = dictionary_model.objects.first()
         return  render(request,'test_words.html',{"dict":dict})
+    
+def edit_word(request,pk):
+    dict = dictionary_model.objects.get(id=pk)
+    return render(request,'edit_word.html',{"dict":dict})
+
+def save_word(request,pk):
+    if request.method == "POST":
+        eng = request.POST.get('eng')
+        mal = request.POST['mal']
+        dict = dictionary_model.objects.get(id=pk)
+        dict.eng_word = eng
+        dict.mal_word = mal
+        dict.save()
+        messages.info(request,'Word Successfully Saved  !')
+    return redirect('test_words',pk=pk)

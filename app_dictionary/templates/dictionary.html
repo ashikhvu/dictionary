@@ -25,12 +25,12 @@
             </div>
         </div>
         <div class="card-body">
-          <div {% if is_online %}  class="text-end p-2" {% else %} class="text_last" style="padding: 0.5rem;" {% endif %}>
+          <div {% if is_online %}  class="text-end p-2" {% else %} class="text_last" style="padding: 0rem;" {% endif %}>
             <div class="row">
-              <div class="col-md-9">
+              <div class="col-md-9 my-2">
                 <input class="form-control" type="text" placeholder="Search here..." id="inputSearch">
               </div>
-              <div class="col-md-3">
+              <div class="col-md-3 my-2">
                 <div class="d-flex justify-content-between">
                   <a class="btn btn-warning" href="{% url 'delete_all' %}">Delete All</a>
                   <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal1" >confirm delete</button>
@@ -68,10 +68,10 @@
                 <tr onclick="window.location.href = `{% url 'test_words' i.id %}`">
                   <td style="width: 1rem;padding: 1rem 2rem;padding-right: 0rem;">{{ forloop.counter }}</td>
                   <td>
-                    <input name="eng[]" class="form-control input_color1 engText" type="text" value="{{ i.eng_word }}" readonly>
+                    <input name="eng[]" class="form-control input_color1 engText bg-light" type="text" value="{{ i.eng_word }}" readonly>
                   </td>
                   <td>
-                    <input name="mal[]" class="form-control input_color1" type="text" value="{{ i.mal_word }}" readonly>
+                    <input name="mal[]" class="form-control input_color1 bg-light" type="text" value="{{ i.mal_word }}" readonly>
                   </td>
                 </tr>
                 {% endfor %}

@@ -17,22 +17,13 @@
       }
     </style>
 
-    
+    <form action="{% url 'save_word' dict.id %}" method="POST">
+      {% csrf_token %}
     <div class="card card_margin bg-danger bg-gradient">
         <div class="card-header">
             <div class="card-title">
                 <h1 class="text-center p-3 text-light ts">Test Words</h1>
             </div>
-            {% if messages %}
-            {% for i in messages %}
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-              <strong>Saved !</strong> {{ i }}
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            {% endfor %}
-            {% endif %}
         </div>
         <div class="card-body">
           <!-- <table id="table1" class="table table-bordered text-center table-dark bg-dark bg-gradient table-hover">
@@ -61,26 +52,26 @@
               <div class="col-md-6 pb-3">
                 <p class="text-center fw-bolder text-light" for="">English</p>
                 <hr style="border-color: white;">
-                <input name="eng[]" class="form-control input_color1 bg-light" value="{{ dict.eng_word }}" type="text" readonly required>
+                <input name="eng" class="form-control input_color1 bg-light" value="{{ dict.eng_word }}" type="text"  required>
               </div>
               <div class="col-md-6 pb-3">
                 <p class="text-center fw-bolder text-light" for="">Malayalam</p>
                 <hr style="border-color: white;">
-                <input name="mal[]" class="form-control input_color1 bg-light" value="{{ dict.mal_word }}" type="text" readonly required>
+                <input name="mal" class="form-control input_color1 bg-light" value="{{ dict.mal_word }}" type="text"  required>
               </div>
             </div>
           </div>
 
           <div class="flex justify-content-center text-center ">
-            <a class="btn btn-light mt-3" href="{% url 'test_words' 0 %}">Reset</a>
-            <a class="btn btn-light mt-3" href="{% url 'prev_word' dict.id %}">Previous</a>
-            <a class="btn btn-light mt-3 px-4" href="{% url 'next_word' dict.id %}">Next</a>
+            <button class="btn btn-light mt-3" onclick="window.history.back()">Cancel</button>
+            <button class="btn btn-light mt-3 px-4" type="submit">Save</button>
           </div>
         </div>
         <div class="card-footer">
 
         </div>
     </div>
+  </form>
 
     <script>
       $(document).ready(function(){

@@ -11,4 +11,6 @@ urlpatterns = [
     path('test_words/<int:pk>',views.test_words,name='test_words'),
     path('next_word/<int:pk>',views.next_word,name='next_word'),
     path('prev_word/<int:pk>',views.prev_word,name='prev_word'),
+    path('edit_word/<int:pk>',views.edit_word,name='edit_word'),
+    path('save_word/<int:pk>',views.save_word,name='save_word'),
 ]
